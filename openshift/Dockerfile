@@ -11,6 +11,7 @@ ENV GO_COMPLIANCE_EXCLUDE="build.*cmd/unpack"
 
 WORKDIR /build
 COPY . .
+RUN sed -ri 's/(go.real "\$\{ARGS)/exec \1/' /usr/bin/go
 RUN make build
 
 FROM registry.ci.openshift.org/ocp/4.14:base
